@@ -107,7 +107,13 @@ const Navbar = () => {
           </div>
         </Link>
         <Link href="/">
-          <div className="hidden md:flex onClick={() => {}}">
+          <div
+            className="hidden md:flex"
+            onClick={() => {
+              setActive("Explore NFTs");
+              setIsOpen(false);
+            }}
+          >
             <Image
               src={images.logo02}
               objectFit="contain"
@@ -150,7 +156,7 @@ const Navbar = () => {
             width={20}
             height={20}
             alt="menu"
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpen(!isOpen)}
             className={theme === "light" && "filter invert"}
           />
         ) : (
@@ -160,7 +166,7 @@ const Navbar = () => {
             width={25}
             height={25}
             alt="menu"
-            onClick={() => setIsOpen(true)}
+            onClick={() => setIsOpen(!isOpen)}
             className={theme === "light" && "filter invert"}
           />
         )}
@@ -168,7 +174,12 @@ const Navbar = () => {
         {isOpen && (
           <div className="fixed inset-0 top-65 dark:bg-nft-dark bg-white z-10 nav-h flex justify-between flex-col">
             <div className="flex-1 p-4">
-              <MenuItems active={active} setActive={setActive} isMobile />
+              <MenuItems
+                active={active}
+                setActive={setActive}
+                isMobile
+                setIsOpen={setIsOpen}
+              />
             </div>
             <div className="p-4 border-t dark:border-nft-black-1 border-nft-gray-1">
               <ButtonGroup setActive={setActive} router={router} />
