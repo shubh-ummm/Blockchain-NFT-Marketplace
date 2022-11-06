@@ -5,9 +5,89 @@ import Image from "next/image";
 import Link from "next/link";
 
 import images from "../assets";
+// import { Button } from './';
+
+const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
+  const generateLink = (i) => {
+    switch (i) {
+      case 0:
+        return "/";
+      case 1:
+        return "/created-nfts";
+      case 2:
+        return "/my-nfts";
+      default:
+        return "/";
+    }
+  };
+
+  return (
+    <ul
+      className={`list-none flexCenter flex-row ${
+        isMobile && "flex-col h-full"
+      }`}
+    >
+      {["Explore NFTs", "Listed NFTs", "My NFTs"].map((item, i) => (
+        <li
+          key={i}
+          onClick={() => {
+            setActive(item);
+
+            if (isMobile) setIsOpen(false);
+          }}
+          className={`flex flex-row items-center font-poppins font-semibold text-base dark:hover:text-white hover:text-nft-dark mx-3
+          ${
+            active === item
+              ? "dark:text-white text-nft-black-1"
+              : "dark:text-nft-gray-3 text-nft-gray-2"
+          } 
+          ${isMobile && "my-5 text-xl"}`}
+        >
+          <Link href={generateLink(i)}>{item}</Link>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const Button = ({ btnName, classStyles, handleClick }) => (
+  <button
+    type="button"
+    className={`nft-gradient text-sm minlg:text-lg py-2 px-6 minlg:px-8 font-poppins font-semibold text-white ${classStyles}`}
+    onClick={handleClick}
+  >
+    {btnName}
+  </button>
+);
+
+// export default Button;
+
+const ButtonGroup = ({ setActive, router }) => {
+  const hasConnected = true;
+
+  return hasConnected ? (
+    <Button
+      btnName="Create"
+      classStyles="mx-2 rounded-xl"
+      handleClick={() => {
+        setActive("");
+        router.push("/create-nft");
+      }}
+    />
+  ) : (
+    <Button
+      btnName="Connect"
+      classStyles="mx-2 rounded-xl"
+      handleClick={() => {}}
+    />
+  );
+};
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
+  const [active, setActive] = useState("Explore NFTs");
+
   return (
     <nav className="flexBetween w-full fixed z-10 p-4 flex-row border-b dark:bg-nft-dark bg-white dark:border-nft-black-1 border-nft-gray-1">
       <div className="flex flex-1 flex-row justify-start">
@@ -49,13 +129,18 @@ const Navbar = () => {
             htmlFor="checkbox"
             className="flexBetween w-8 h-4 bg-black rounded-2xl p-1 relative label"
           >
-            <i className="fas fa-sun" />
             <i className="fas fa-moon" />
+            <i className="fas fa-sun" />
             <div className="w-3 h-3 absolute bg-white rounded-full ball" />
           </label>
         </div>
+        <div className="md:hidden flex">
+          <MenuItems active={active} setActive={setActive} />
+          <div className="ml-4">
+            <ButtonGroup setActive={setActive} router={router} />
+          </div>
+        </div>
       </div>
-      <div className="md:hidden flex">MenuItems</div>
     </nav>
   );
 };
