@@ -6,6 +6,7 @@ import CreatorCard from "../components/CreatorCard";
 
 import images from "../assets";
 import { makeId } from "../utils/makeId";
+import NFTCard from "../components/NFTCard";
 
 const Home = () => {
   const [hideButtons, setHideButtons] = useState(false);
@@ -29,7 +30,7 @@ const Home = () => {
     const { current: parent } = parentRef;
 
     if (current?.scrollWidth >= parent?.offsetWidth) {
-      setHideButtons(false);    
+      setHideButtons(false);
     } else {
       setHideButtons(true);
     }
@@ -37,10 +38,10 @@ const Home = () => {
 
   useEffect(() => {
     isScrollable();
-    window.addEventListener('resize', isScrollable);
+    window.addEventListener("resize", isScrollable);
 
     return () => {
-      window.removeEventListener('resize', isScrollable);
+      window.removeEventListener("resize", isScrollable);
     };
   });
 
@@ -54,7 +55,7 @@ const Home = () => {
         />
         <div>
           <h1 className="font-poppins dark:text-white text-nft-black-1 text-2xl minlg:text-4xl font-semibold ml-4 xs:ml-0">
-            Best Creators
+            Top Creators
           </h1>
           <div className="relative flex-1 max-w-full flex mt-3" ref={parentRef}>
             <div
@@ -99,6 +100,29 @@ const Home = () => {
                 </>
               )}
             </div>
+          </div>
+        </div>
+        <div className="mt-10">
+          <div className="flexBetween mx-4 xs:mx-0 minlg:mx-8 sm:flex-col sm:items-start">
+            <h1 className="flex-1 before:first:font-poppins dark:text-white text-nft-black-1 text-2xl minlg:text-4xl font-semibold sm:mb-4">
+              Popular Assets
+            </h1>
+            {/* <div>SearchBar</div> */}
+          </div>
+          <div className="mt-3 w-full flex flex-wrap justify-start md:justify-center">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+              <NFTCard
+                key={`nft-${i}`}
+                nft={{
+                  i,
+                  name: `Nifty NFT ${i}`,
+                  price: (10 - i * 0.5).toFixed(2),
+                  seller: `0x${makeId(3)}...${makeId(4)}`,
+                  owner: `0x${makeId(3)}...${makeId(4)}`,
+                  description: "NFT on Sale",
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
