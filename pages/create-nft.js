@@ -1,12 +1,12 @@
-import React, { useState, useMemo, useCallback, useContext } from "react";
+import React, { useState, useMemo, useCallback, useContext } from 'react';
 
-import { useRouter } from "next/router";
-import { useDropzone } from "react-dropzone";
-import Image from "next/image";
-import { useTheme } from "next-themes";
+import { useRouter } from 'next/router';
+import { useDropzone } from 'react-dropzone';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 // import { Button, Input } from "../components";
-import images from "../assets";
+import images from '../assets';
 
 // button component
 const Button = ({ btnName, classStyles, handleClick }) => (
@@ -26,7 +26,7 @@ const Input = ({ inputType, title, placeholder, handleClick }) => (
       {title}
     </p>
 
-    {inputType === "number" ? (
+    {inputType === 'number' ? (
       <div className="dark:bg-nft-black-1 bg-white border dark:border-nft-black-1 border-nft-gray-2 rounded-lg w-full outline-none font-poppins dark:text-white text-nft-gray-2 text-base mt-4 px-4 py-3 flexBetween flex-row">
         <input
           type="number"
@@ -38,7 +38,7 @@ const Input = ({ inputType, title, placeholder, handleClick }) => (
           ETH
         </p>
       </div>
-    ) : inputType === "textarea" ? (
+    ) : inputType === 'textarea' ? (
       <textarea
         rows={10}
         className="dark:bg-nft-black-1 bg-white border dark:border-nft-black-1 border-nft-gray-2 rounded-lg w-full outline-none font-poppins dark:text-white text-nft-gray-2 text-base mt-4 px-4 py-3"
@@ -58,9 +58,9 @@ const Input = ({ inputType, title, placeholder, handleClick }) => (
 const CreateNFT = () => {
   const [fileUrl, setFileUrl] = useState(null);
   const [formInput, setFormInput] = useState({
-    price: "",
-    name: "",
-    description: "",
+    price: '',
+    name: '',
+    description: '',
   });
   const { theme } = useTheme();
 
@@ -76,16 +76,16 @@ const CreateNFT = () => {
     isDragReject,
   } = useDropzone({
     onDrop,
-    accept: "image/*",
+    accept: 'image/*',
     maxSize: 5000000,
   });
 
   const fileStyle = useMemo(
     () => `dark:bg-nft-black-1 bg-white border dark:border-white border-nft-gray-2 flex flex-col items-center p-5 rounded-sm border-dashed  
-         ${isDragActive && " border-file-active"} 
-         ${isDragAccept && " border-file-accept"} 
-         ${isDragReject && " border-file-reject"}`,
-    [isDragActive, isDragReject, isDragAccept]
+         ${isDragActive && ' border-file-active'} 
+         ${isDragAccept && ' border-file-accept'} 
+         ${isDragReject && ' border-file-reject'}`,
+    [isDragActive, isDragReject, isDragAccept],
   );
 
   return (
@@ -112,7 +112,7 @@ const CreateNFT = () => {
                     height={100}
                     objectFit="contain"
                     alt="file upload"
-                    className={theme === "light" && "filter invert"}
+                    className={theme === 'light' && 'filter invert'}
                   />
                 </div>
                 <p className="font-poppins dark:text-white text-nft-black-1 font-semibold text-sm">

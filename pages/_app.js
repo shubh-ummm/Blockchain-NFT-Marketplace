@@ -1,8 +1,9 @@
-import Script from "next/script";
-import { ThemeProvider } from "next-themes";
+import Script from 'next/script';
+import { ThemeProvider } from 'next-themes';
 
-import { Navbar, Footer } from "../components";
-import "../styles/globals.css";
+// eslint-disable-next-line import/no-unresolved
+import { Navbar, Footer } from '../components';
+import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => (
   <ThemeProvider attribute="class">
